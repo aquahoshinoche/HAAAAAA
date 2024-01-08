@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" onclick="pular()"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <style>*{
+    margin: 0;
+    padding: 0;
+}
+#game{
+    width: 500px;
+    height: 200px;
+    border: 1px solid black;
+}
+#personagem{
+    width: 20px;
+    height: 50px;
+    background-color: red;
+    position: relative;
+    top: 150px;
+}
+.animar{
+    animation: personagem 500ms infinite;
+
+}
+#quadrado{
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+    position: relative;
+    top: 130px;
+    left: 480px;
+animation: quadrado 1s infinite linear;
+}
+@keyframes quadrado{
+    0%{left: 480px;}
+    100%{left: -40px;}
+}
+@keyframes personagem{
+    0%{top: 150px;}
+    30%{top: 100px;}
+    70%{top:100px;}
+    100%{top: 150px;}
+}</style>
+</head>
+<body>
+  <div id="game">
+    <div id="personagem"></div>
+    <div id="quadrado"></div>
+  </div>
+</body>
+<script src="jogo.js"></script>
+<script>let personagem = document.querySelector('#personagem')
+  let quadrado = document.querySelector('#quadrado')
+  
+  function pular(){
+      if(personagem.classList != 'animar'){
+          personagem.classList.add('animar')
+      }
+      setTimeout(function(){
+      personagem.classList.remove('animar')
+      }, 500)
+  }
+  
+  
+  var testarColisao = setInterval( function(){
+  
+      var topoPersonagem = parseInt(
+          window.getComputedStyle(personagem).getPropertyValue('top')
+      )
+      var EsquerdaQuadrado = parseInt(
+          window.getComputedStyle(quadrado).getPropertyValue('left')
+      )
+      var DireitaQuadrado = parseInt(
+          window.getComputedStyle(quadrado).getPropertyValue('direita')
+      )
+      if(EsquerdaQuadrado < 20 && EsquerdaQuadrado > 0 && topoPersonagem >= 130){
+          quadrado.style.animation = 'none'
+          quadrado.style.display = 'none'
+          alert('tu é muito ruim caralho')
+          
+      }
+  }, 10)</script>
+</html>
